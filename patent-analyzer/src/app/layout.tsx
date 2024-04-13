@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { inter } from "@/app/ui/fonts";
-import "./globals.css";
+import NavBar from "@/app/ui/NavBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <main>
-          <p>Insert NavBar here</p>
+          <NavBar />
           {children}
         </main>
       </body>
