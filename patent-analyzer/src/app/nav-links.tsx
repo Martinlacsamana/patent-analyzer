@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import styles from "@/app/ui/global.module.css";
+import styles from "@/app/global.module.css";
    
    
 export default function NavLinks() {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "./ui/global.module.css";
+import styles from "./global.module.css";
 
 export default function Home() {
 

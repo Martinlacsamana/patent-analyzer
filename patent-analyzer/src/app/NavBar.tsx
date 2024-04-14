@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import NavLinks from '@/app/ui/nav-links';
+import NavLinks from '@/app/nav-links';
 // import Logo from '@/app/ui/acme-logo';
 // import { PowerIcon } from '@heroicons/react/24/outline';
-import styles from "@/app/ui/global.module.css";
+import styles from "@/app/global.module.css";
 
 export default function NavBar() {
   return (
@@ -14,7 +14,7 @@ export default function NavBar() {
         <div className="logo">
           {/* Replace with actual logo later */}
           <svg width="40" height="40">
-            <circle cx="20" cy="20" r="15" stroke="black" stroke-width="1" fill="#d0d0d0" />
+            <circle cx="20" cy="20" r="15" stroke="black" strokeWidth="1" fill="#d0d0d0" />
           </svg>
         </div>
       </Link>
