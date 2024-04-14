@@ -2,7 +2,7 @@ import Link from 'next/link';
 import NavLinks from '@/app/ui/nav-links';
 // import Logo from '@/app/ui/acme-logo';
 // import { PowerIcon } from '@heroicons/react/24/outline';
-import styles from "@/app/ui/home.module.css";
+import styles from "@/app/ui/global.module.css";
 
 export default function NavBar() {
   return (
@@ -22,9 +22,7 @@ export default function NavBar() {
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
         <form>
-          <button className="login">
-            {/* Add login/profile button here */}
-          </button>
+          {/* Add login/profile button here */}
         </form>
       </div>
     </div>

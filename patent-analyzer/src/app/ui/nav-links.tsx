@@ -2,12 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import styles from "@/app/ui/home.module.css";
+import styles from "@/app/ui/global.module.css";
    
    
 export default function NavLinks() {
 const links = [
-    {name:"Library", icon:"a", "href":"library"},
+    {name:"My Library", icon:"a", "href":"library"},
     // {name:"Patent", icon:"b", "href":"patent"}
 ];
 const pathname = usePathname();

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { inter } from "@/app/ui/fonts";
 import NavBar from "@/app/ui/NavBar";
+import styles from "./ui/global.module.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,11 +15,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased ${styles.body}`}>
         <main>
           <NavBar />
           {children}
         </main>
+        <footer className={styles.footer}>
+          {"Footer info here :)"}
+        </footer>
       </body>
     </html>
   );
