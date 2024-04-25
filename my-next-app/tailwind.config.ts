@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         "custom-blue": '#59808C',
         "custom-grey": '#ABA6A6',
+        "custom-navbar": '#DAE5EA',
       }
     },
   },
