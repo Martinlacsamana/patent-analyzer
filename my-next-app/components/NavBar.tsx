@@ -12,7 +12,12 @@ const NavBar = () => {
             style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
         <div onClick={() => router.push('/')} className="cursor-pointer">
             {/* If we had a brand name, we could put that here */}
-            <span className="text-custom-blue text-lg m-10">Brand Name</span>
+
+
+            <button className="text-black text-lg" onClick={() => router.push('/')}>
+                Our App
+            </button>
+
         </div>
         <div className="flex  space-x-4 h-[30px]">
            

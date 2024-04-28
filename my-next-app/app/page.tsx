@@ -2,6 +2,8 @@
 import { useCallback, useState } from 'react';
 import {useRouter} from 'next/navigation';
 import PatentCard from "@/components/PatentCard";
+import PatentUpload from "@/components/PatentUpload";
+import PatentUploadLoading from "@/components/PatentUploadLoading";
 
 import { useAppSelector, useAppDispatch } from '../lib/hooks'
 import {
@@ -111,6 +113,7 @@ export default function Home() {
             </div>
           </button> */}
         </div>
+
 
         {/* `Recent History` section */}
         <p className="text-xl font-normal leading-9 pt-[24px] pb-[12px]">Recent History</p>
