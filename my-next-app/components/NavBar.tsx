@@ -10,7 +10,7 @@ const NavBar = () => {
     return (
         <nav className="w-full h-[70px] bg-gray-800 flex items-center justify-between px-4 rounded-b-3xl bg-gradient-to-b from-[#DAE5EA] to-[#DAE5EA] shadow"
             style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
-        <div onClick={() => router.push('/')}>
+        <div onClick={() => router.push('/')} className="cursor-pointer">
             {/* If we had a brand name, we could put that here */}
 
 
