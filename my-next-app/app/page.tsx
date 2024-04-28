@@ -1,16 +1,25 @@
 'use client';
-import Image from "next/image";
-import {Download, Link2} from 'lucide-react'
+import { useCallback, useState } from 'react';
+import {useRouter} from 'next/navigation';
 import PatentCard from "@/components/PatentCard";
+
+import { useAppSelector, useAppDispatch } from '../lib/hooks'
+import {
+  storeFileURL
+} from '../lib/features/analyzeSlice'
 
 export default function Home() {
 
-  var uploadedFile;
+  const [uploadedFile, setUploadedFile] = useState<File>();
+  const [uploadedFileName, setUploadedFileName] = useState<string>();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleUpload = (event: { target: { files: any; }; }) => {
     const file = event.target.files;
     console.log(file);
-    uploadedFile = file.name;
+    setUploadedFileName(file.name);
+    setUploadedFile(file[0]);
   }
 
   function dropHandler(ev: { preventDefault: () => void; dataTransfer: { items: any; files: any; }; }) {
@@ -32,16 +41,29 @@ export default function Home() {
       // Use DataTransfer interface to access the file(s)
       [...ev.dataTransfer.files].forEach((file, i) => {
         console.log(`… file[${i}].name = ${file.name}`);
-        uploadedFile = file.name;
+        setUploadedFileName(file.name);
+        setUploadedFile(file);
       });
     }
   }
 
   function dragOverHandler(ev: { preventDefault: () => void; }) {
     console.log("File(s) in drop zone");
-  
-    // Prevent default behavior (Prevent file from being opened)
     ev.preventDefault();
+  }
+
+  async function storePatent(url:string) {
+    dispatch(storeFileURL(url));
+  }
+
+  function analyzePatent() {
+    if (uploadedFile) {
+      const url = URL.createObjectURL(uploadedFile);
+      storePatent(url).then(
+        function(value) {router.push('/patent');},
+        function(error) {console.log(error);}
+      )
+    }
   }
 
   return (
@@ -73,9 +95,10 @@ export default function Home() {
                     className="text-sm cursor-pointer"
                     type='file'
                     onChange={handleUpload}
-                    value={uploadedFile}
+                    value={uploadedFileName}
                 />
-            </form>
+              </form>
+              <button onClick={() => analyzePatent()}>Go</button>
             </div>
           </div>
          
