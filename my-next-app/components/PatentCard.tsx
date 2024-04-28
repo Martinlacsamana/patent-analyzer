@@ -18,8 +18,8 @@ function PatentCard({title, tags, status, patentId}:PatentCardProps) {
           {/* Tags */}
           <div className="inline-flex items-center gap-[12px] flex-[0_0_auto] relative pt-6">
             {tags.map((tag, index) => (
-              <div key={index} className="border border-solid border-[#59808c] h-[26px] flex-[0_0_auto] px-[16px] py-[4px] rounded-[8px] justify-center bg-white">
-                <p className="text-black text-xs font-normal">{tag}</p>
+              <div key={index} className="border border-solid border-[#a0a0a1] h-[26px] flex-[0_0_auto] px-[16px] py-[4px] rounded-[8px] justify-center bg-white">
+                <p className="text-[#a0a0a1] text-xs font-normal">{tag}</p>
               </div>
             ))}
           </div>

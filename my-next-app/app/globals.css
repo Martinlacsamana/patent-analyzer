@@ -26,3 +26,18 @@ body {
     text-wrap: balance;
   }
 }
+
+input::file-selector-button {
+  background-color: #BCD3DB;
+  color: #333333;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin: 10px 10px 10px 0px;
+  cursor: pointer;
+}
+
+input::file-selector-button:hover {
+  background-color: #59808C;
+  color: #FFFFFF;
+}
