@@ -1,0 +1,79 @@
+import { Folder, File } from 'lucide-react';
+
+function SavePatent() {
+    return (
+        <div className="flex items-center justify-center min-h-screen"> {/* This div centers the modal */}
+            <div className="flex flex-col h-[500px] w-[500px] rounded-xl border border-[#DCE4E7] bg-white shadow-lg p-4 pb-8 justify-between"> {/* Make this a flex column container */}
+                
+                <div>
+                    <button className="btn btn-circle btn-outline relative float-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="#333333">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    <div className="pl-4 pr-4 -mt-4">
+                        {/* Header */}
+                        <div className="mb-6 pt-10 flex items-center space-x-10">
+                            <p className="text-lg font-medium whitespace-nowrap">Save the new patent</p>
+                            <div className="flex items-center space-x-1 justify-center ">
+                                <File size={14}/>
+                                <p className="text-xs  whitespace-nowrap">Microfluidic device for device...</p>
+                            </div>
+                        </div>
+                        
+                        {/* Folders a user can select from*/}
+                        <div className="flex flex-col space-y-2">
+                            <div className="flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3" style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
+                                <Folder size={15}/>
+                                <p className="text-sm">Computer Vision for Medical</p>
+                            </div>
+
+                            <div className="flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3" style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
+                                <Folder size={15}/>
+                                <p className="text-sm">Biomedical Device</p>
+                            </div>
+
+                            <div className="flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3" style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
+                                <Folder size={15}/>
+                                <p className="text-sm">Innovation Strategy</p>
+                            </div>
+                           
+                        </div>
+
+                        
+                        <div className="py-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="220" height="2" viewBox="0 0 352 2" fill="none">
+                                <path d="M1 1H351" stroke="#DAE5EA" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+
+                        {/* Patents that were previously saved! */}
+                        <div className="flex flex-col space-y-2">
+                            <div className="flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3" style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
+                                <File size={15} color="#A0A0A1"/>
+                                <p className="text-sm text-[#A0A0A1]">Method and Apparatus for Image-Based Navigation</p>
+                            </div>
+
+                            <div className="flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3" style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
+                                <File size={15} color="#A0A0A1"/>
+                                <p className="text-sm text-[#A0A0A1]">Single sided light-actuated microfluidic device with...</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                {/* Buttons */}
+                <div className="flex justify-between items-center w-full pl-4 pr-4 mt-6">
+                    <button className="flex items-center justify-center h-[30px] px-4 py-2 bg-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-300 text-sm whitespace-nowrap">Create New Folder</button>
+                    <div className="flex space-x-4">
+                        <button className="flex items-center justify-center h-[30px] px-4 py-2 bg-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-300 text-sm whitespace-nowrap">Skip Saving</button>
+                        <button className="flex items-center justify-center h-[30px] px-4 py-2 bg-[#59808C] text-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-300 text-sm whitespace-nowrap">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+export default SavePatent;

@@ -2,6 +2,8 @@
 import Image from "next/image";
 import {Download, Link2} from 'lucide-react'
 import PatentCard from "@/components/PatentCard";
+import PatentUpload from "@/components/PatentUpload";
+import PatentUploadLoading from "@/components/PatentUploadLoading";
 
 export default function Home() {
 
@@ -88,6 +90,7 @@ export default function Home() {
             </div>
           </button> */}
         </div>
+
 
         {/* `Recent History` section */}
         <p className="text-xl font-normal leading-9 pt-[24px] pb-[12px]">Recent History</p>
