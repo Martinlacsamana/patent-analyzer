@@ -26,3 +26,8 @@ body {
     text-wrap: balance;
   }
 }
+
+button {
+  background-color: #59808C;
+  color: #FFFFFF;
+}
