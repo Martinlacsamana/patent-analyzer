@@ -31,8 +31,6 @@ export default function Library() {
           </button>
         </div>
         
-       
-
 
         {/* `Recent History` section */}
         {selectedTab === 'Recent History' && (
@@ -88,32 +86,15 @@ export default function Library() {
         {selectedTab === 'Workspace' && (
           <>
           <div className="grid grid-cols-3 gap-4 w-full ">
-           
               <FolderCard title="Computer Vision for Medi..." date="April 18, 2024"/>
-           
-            
-            
               <FolderCard title="Biomedical Device" date="April 16, 2024"/>
-            
-
-            
-           
               <FolderCard title="Inovation Strategy" date="April 12, 2024"/>
-           
-            
           </div>
 
           <div className="grid grid-cols-3 gap-4 w-full mt-4">
-           
               <FolderCard title="Method and Apparatus for..." date="1 hr ago"/>
               <FolderCard title="Single sided light-actuate..." date="15:33 PM today"/>
-          
-           
-            
           </div>
-          
-
-
           </>
         )}
 

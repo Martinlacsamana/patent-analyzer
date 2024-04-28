@@ -1,3 +1,6 @@
+import SavePatent from "@/components/modals/SavePatent";
+
+
 export default function Patent() {
     return (
       
@@ -5,6 +8,7 @@ export default function Patent() {
           <p>
             This is the patent page!
           </p>
+          <SavePatent/>
         </div>
    
     );

@@ -12,7 +12,10 @@ const NavBar = () => {
             style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
         <div>
             {/* If we had a brand name, we could put that here */}
-            {/* <span className="text-white text-lg">Brand</span> */}
+
+            <button className="text-black text-lg" onClick={() => router.push('/')}>
+                Our App
+            </button>
         </div>
         <div className="flex  space-x-4 h-[30px]">
            
