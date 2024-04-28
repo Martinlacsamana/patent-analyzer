@@ -41,3 +41,8 @@ input::file-selector-button:hover {
   background-color: #59808C;
   color: #FFFFFF;
 }
+
+button:hover {
+  background-color: #59808C;
+  color: #FFFFFF;
+}

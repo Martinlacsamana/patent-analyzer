@@ -15,19 +15,19 @@ export default function Library() {
   return (
     
     <div className="flex flex-col justify-center items-center pt-[24px]">
-      <main className="w-2/3">
+      <main className="w-2/3 mt-10">
         {/* Header text */}
         <p className="text-2xl font-normal leading-9">My Library</p>
         <p className="text-base font-normal leading-6 pt-[6px]">Review recent patent reading history, organize, and manage your patent projects all in one place.</p>
 
         {/* Select tab: Recent History or Workspace */}
-        <div className="flex space-x-20 items-center pt-[24px] pb-[24px]">
-        <button className={` rounded rounded-xl h-[40px] relative flex items-center justify-center px-1 ${selectedTab === 'Recent History' ? 'bg-custom-navbar' : ''}`} onClick={() => handleTabClick('Recent History')}>
-            <p className="text-2xl font-normal leading-9">Recent History</p>
-          </button>
+        <div className="flex space-x-3 items-center pt-[24px] pb-[24px]">
+        <button className={` rounded rounded-xl h-[40px] relative flex items-center justify-center px-4 ${selectedTab === 'Recent History' ? 'bg-custom-navbar' : ''}`} onClick={() => handleTabClick('Recent History')}>
+            <p className="text-base font-normal leading-7">Recent History</p>
+        </button>
           
-          <button className={`rounded rounded-xl h-[40px] relative flex items-center justify-center px-1 ${selectedTab === 'Workspace' ? 'bg-custom-navbar' : ''}`} onClick={() => handleTabClick('Workspace')}>
-            <p className="text-2xl font-normal leading-9">Workspace</p>
+          <button className={`rounded rounded-xl h-[40px] relative flex items-center justify-center px-4 ${selectedTab === 'Workspace' ? 'bg-custom-navbar' : ''}`} onClick={() => handleTabClick('Workspace')}>
+            <p className="text-base font-normal leading-7">Workspace</p>
           </button>
         </div>
         
