@@ -7,7 +7,7 @@ import PatentUploadLoading from "@/components/PatentUploadLoading";
 
 import { useAppSelector, useAppDispatch } from '../lib/hooks'
 import {
-  storeFileURL
+  storeFileURL, examples
 } from '../lib/features/analyzeSlice'
 
 export default function Home() {
@@ -16,6 +16,15 @@ export default function Home() {
   const [uploadedFileName, setUploadedFileName] = useState<string>();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const data = useAppSelector(examples);
+
+  interface PatentInfo {
+    title: string;
+    tags: Array<string>;
+    status: string;
+    patentId: string;
+    url: string;
+  }
 
   const handleUpload = (event: { target: { files: any; }; }) => {
     const file = event.target.files;
@@ -58,14 +67,29 @@ export default function Home() {
     dispatch(storeFileURL(url));
   }
 
+  function goToPatent(url:string) {
+    storePatent(url).then(
+      function(value) {router.push('/patent');},
+      function(error) {console.log(error);}
+    )
+  }
+
   function analyzePatent() {
     if (uploadedFile) {
       const url = URL.createObjectURL(uploadedFile);
-      storePatent(url).then(
-        function(value) {router.push('/patent');},
-        function(error) {console.log(error);}
-      )
+      goToPatent(url);
     }
+  }
+
+  function renderPatentCard(entry:PatentInfo) {
+    return (
+      <PatentCard
+        title={entry.title}
+        tags={entry.tags}
+        status={entry.status}
+        patentId={entry.patentId}
+        onClick={() => goToPatent(entry.url)}
+      />);
   }
 
   return (
@@ -84,11 +108,6 @@ export default function Home() {
           id="drop_zone" onDrop={dropHandler} onDragOver={dragOverHandler}
           >
           <div className="flex justify-center items-center space-x-2 pb-1">
-            
-            {/* <div className="bg-custom-blue rounded-full p-1">
-              <Download size={18} color="#ffffff" />
-            </div> */}
-            
             <div>
               <p className="text-base font-normal whitespace-nowrap">Upload or drop a file</p>
               <form>
@@ -103,27 +122,21 @@ export default function Home() {
               <button onClick={() => analyzePatent()}>Go</button>
             </div>
           </div>
-         
-          {/* <p className="text-sm font-normal whitespace-nowrap pb-6">Click to upload or drag a PDF or DOCX file here</p>
-
-          <button className="w-36 flex justify-center items-center">
-            <div className="w-full flex justify-center items-center space-x-2 bg-custom-blue rounded-lg pl-4 pr-4 p-1">
-              <Link2 size={24} color="#ffffff" />
-              <p className="text-white text-base font-normal"> From URL </p>
-            </div>
-          </button> */}
         </div>
 
 
         {/* `Recent History` section */}
         <p className="text-xl font-normal leading-9 pt-[24px] pb-[12px]">Recent History</p>
         <div className="flex justify-center w-full space-x-4 pb-10">
+
+          {data.map((patent) => renderPatentCard(patent))}
           
-          <PatentCard
+          {/* <PatentCard
             title="Microfluidic device for deformable beads enrichment and self-regulated ordering and encapsulation in droplets"
             tags={['Biomed', 'Physical Device']}
             status="Pending"
             patentId="US20210331174A1"
+            url=""
           />
 
           <PatentCard
@@ -131,6 +144,7 @@ export default function Home() {
             tags={['Biomed']}
             status="Pending"
             patentId="US20240024042A1"
+            url=""
           />
 
           <PatentCard
@@ -138,7 +152,8 @@ export default function Home() {
             tags={['Biomed']}
             status="Active"
             patentId="US9815056B2"
-          />
+            url=""
+          /> */}
         </div>
 
       </main>

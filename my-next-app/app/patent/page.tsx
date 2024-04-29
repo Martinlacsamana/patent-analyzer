@@ -42,5 +42,6 @@ export default function Patent() {
               <p className="text-sm font-normal pb-[12px]">This invention introduces a novel microfluidic device designed to improve the handling and processing of deformable beads in a controlled environment. The device features a series of inlets and microfluidic channels that facilitate the encapsulation of these beads into droplets, a method that is crucial for advancing laboratory assays such as single-cell analyses and other microreactor applications.</p>
             </div>
           </main>
+          </div>
     );
   }

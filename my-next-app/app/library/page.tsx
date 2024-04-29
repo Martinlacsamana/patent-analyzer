@@ -15,7 +15,7 @@ export default function Library() {
   return (
     
     <div className="flex flex-col justify-center items-center pt-[24px]">
-      <main className="w-2/3 mt-10">
+      <main className="w-2/3 my-10">
         {/* Header text */}
         <p className="text-2xl font-normal leading-9">My Library</p>
         <p className="text-base font-normal leading-6 pt-[6px]">Review recent patent reading history, organize, and manage your patent projects all in one place.</p>
@@ -41,6 +41,7 @@ export default function Library() {
               tags={['Biomed', 'Physical Device']}
               status="Pending"
               patentId="US20210331174A1"
+              onClick=""
             />
 
             <PatentCard 
@@ -48,6 +49,7 @@ export default function Library() {
               tags={['Biomed']}
               status="Pending"
               patentId="US20240024042A1"
+              onClick=""
             />
 
             <PatentCard 
@@ -55,6 +57,7 @@ export default function Library() {
               tags={['Biomed']}
               status="Active"
               patentId="US9815056B2"
+              onClick=""
             />
           </div>
           <div className="flex justify-center w-full space-x-4 mt-4">
@@ -63,6 +66,7 @@ export default function Library() {
               tags={['Biomed', 'Physical Device']}
               status="Pending"
               patentId="US20210331174A1"
+              onClick=""
             />
 
             <PatentCard 
@@ -70,6 +74,7 @@ export default function Library() {
               tags={['Biomed']}
               status="Pending"
               patentId="US20240024042A1"
+              onClick=""
             />
 
             <PatentCard 
@@ -77,6 +82,7 @@ export default function Library() {
               tags={['Biomed']}
               status="Active"
               patentId="US9815056B2"
+              onClick=""
             />
           </div>
         </>

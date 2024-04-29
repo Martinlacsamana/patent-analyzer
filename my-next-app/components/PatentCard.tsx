@@ -5,14 +5,15 @@ interface PatentCardProps {
   tags: string[];
   status: string;
   patentId: string;
+  onClick: any,
 }
 
 
-function PatentCard({title, tags, status, patentId}:PatentCardProps) {
+function PatentCard({title, tags, status, patentId, onClick}:PatentCardProps) {
     return (
         <div className="flex w-1/3 max-h-[230px] flex-col p-5 rounded-lg border border-[#DAE5EA] bg-white shadow">
             <div>
-                <p className="text-base font-normal h-[90px]">{title}</p>
+                <p className="text-base font-normal h-[90px] cursor-pointer hover:text-custom-blue" onClick={onClick}>{title}</p>
             </div>
           
           {/* Tags */}
