@@ -67,6 +67,7 @@ export default function Home() {
       solution: "",
       solutionKeywords: [],
       summary: "",
+      fulltext: "",
     }
     dispatch(storeFile(uploadedPatent));
   }

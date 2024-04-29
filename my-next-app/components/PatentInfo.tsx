@@ -9,4 +9,5 @@ export default interface PatentInfo {
     solution: string;
     solutionKeywords: Array<string>;
     summary: string;
+    fulltext: string;
   }
