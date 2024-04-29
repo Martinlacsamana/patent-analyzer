@@ -2,12 +2,13 @@
 import { useCallback, useState } from 'react';
 import {useRouter} from 'next/navigation';
 import PatentCard from "@/components/PatentCard";
+import PatentInfo from "@/components/PatentInfo";
 import PatentUpload from "@/components/PatentUpload";
 import PatentUploadLoading from "@/components/PatentUploadLoading";
 
 import { useAppSelector, useAppDispatch } from '../lib/hooks'
 import {
-  storeFileURL, examples
+  storeFile, examples
 } from '../lib/features/analyzeSlice'
 
 export default function Home() {
@@ -17,14 +18,6 @@ export default function Home() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const data = useAppSelector(examples);
-
-  interface PatentInfo {
-    title: string;
-    tags: Array<string>;
-    status: string;
-    patentId: string;
-    url: string;
-  }
 
   const handleUpload = (event: { target: { files: any; }; }) => {
     const file = event.target.files;
@@ -62,12 +55,35 @@ export default function Home() {
     ev.preventDefault();
   }
 
-  async function storePatent(url:string) {
-    dispatch(storeFileURL(url));
+  async function storeNewPatent(url:string) {
+    const uploadedPatent = {
+      title: "",
+      tags: [],
+      status: "",
+      patentId: "",
+      url: url,
+      problem: "",
+      problemKeywords: [],
+      solution: "",
+      solutionKeywords: [],
+      summary: "",
+    }
+    dispatch(storeFile(uploadedPatent));
+  }
+
+  async function storePatent(info:PatentInfo) {
+    dispatch(storeFile(info));
   }
 
   function goToPatent(url:string) {
-    storePatent(url).then(
+    storeNewPatent(url).then(
+      function(value) {router.push('/patent');},
+      function(error) {console.log(error);}
+    )
+  }
+
+  function goToRecent(info:PatentInfo) {
+    storePatent(info).then(
       function(value) {router.push('/patent');},
       function(error) {console.log(error);}
     )
@@ -83,11 +99,8 @@ export default function Home() {
   function renderPatentCard(entry:PatentInfo) {
     return (
       <PatentCard
-        title={entry.title}
-        tags={entry.tags}
-        status={entry.status}
-        patentId={entry.patentId}
-        onClick={() => goToPatent(entry.url)}
+        info={entry}
+        onClick={() => goToRecent(entry)}
       />);
   }
 
@@ -130,29 +143,6 @@ export default function Home() {
 
           {data.map((patent) => renderPatentCard(patent))}
           
-          {/* <PatentCard
-            title="Microfluidic device for deformable beads enrichment and self-regulated ordering and encapsulation in droplets"
-            tags={['Biomed', 'Physical Device']}
-            status="Pending"
-            patentId="US20210331174A1"
-            url=""
-          />
-
-          <PatentCard
-            title="Method and Apparatus for Image-Based Navigation"
-            tags={['Biomed']}
-            status="Pending"
-            patentId="US20240024042A1"
-            url=""
-          />
-
-          <PatentCard
-            title="Single sided light-actuated microfluidic device with integrated mesh ground"
-            tags={['Biomed']}
-            status="Active"
-            patentId="US9815056B2"
-            url=""
-          /> */}
         </div>
 
       </main>

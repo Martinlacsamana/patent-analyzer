@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import PatentCard from "@/components/PatentCard";
 import {Folder} from 'lucide-react'
 import FolderCard from '@/components/FolderCard';
+import PatentInfo from "@/components/PatentInfo";
 import {useRouter} from 'next/navigation';
 import { useAppSelector, useAppDispatch } from '../../lib/hooks';
 import {
-  storeFileURL, examples
+  storeFile, examples
 } from '../../lib/features/analyzeSlice';
 
 export default function Library() {
@@ -15,24 +16,16 @@ export default function Library() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  interface PatentInfo {
-    title: string;
-    tags: Array<string>;
-    status: string;
-    patentId: string;
-    url: string;
-  }
-
   const handleTabClick = (tab: String) => {
     setSelectedTab(tab);
   };
 
-  async function storePatent(url:string) {
-    dispatch(storeFileURL(url));
+  async function storePatent(info:PatentInfo) {
+    dispatch(storeFile(info));
   }
 
-  function goToPatent(url:string) {
-    storePatent(url).then(
+  function goToPatent(info:PatentInfo) {
+    storePatent(info).then(
       function(value) {router.push('/patent');},
       function(error) {console.log(error);}
     )
@@ -41,11 +34,8 @@ export default function Library() {
   function renderPatentCard(entry:PatentInfo) {
     return (
       <PatentCard
-        title={entry.title}
-        tags={entry.tags}
-        status={entry.status}
-        patentId={entry.patentId}
-        onClick={() => goToPatent(entry.url)}
+        info={entry}
+        onClick={() => goToPatent(entry)}
       />);
   }
 

@@ -5,6 +5,7 @@ import { pdfjs, Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import './components.css';
+import PatentInfo from "@/components/PatentInfo";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
@@ -20,7 +21,7 @@ const maxWidth = 500;
 type PDFFile = string | File | null;
 
 interface PatentReaderProps {
-    file: any;
+    file: PatentInfo;
   }
 
 export default function PatentReader({file}:PatentReaderProps) {
@@ -74,7 +75,7 @@ export default function PatentReader({file}:PatentReaderProps) {
             <div className="cursor-pointer" onClick={nextPage}>{">"}</div>
         </div>
         <div className="bg-transparent" ref={setContainerRef}>
-            <Document file={file} options={options} onLoadSuccess={onDocumentLoadSuccess}>
+            <Document file={file.url} options={options} onLoadSuccess={onDocumentLoadSuccess}>
                 <Page pageNumber={pageNumber} />
             </Document>
         </div>
