@@ -3,13 +3,51 @@ import React, { useState } from 'react';
 import PatentCard from "@/components/PatentCard";
 import {Folder} from 'lucide-react'
 import FolderCard from '@/components/FolderCard';
+import {useRouter} from 'next/navigation';
+import { useAppSelector, useAppDispatch } from '../../lib/hooks';
+import {
+  storeFileURL, examples
+} from '../../lib/features/analyzeSlice';
 
 export default function Library() {
   const [selectedTab, setSelectedTab] = useState<String>('Recent History');
+  const data = useAppSelector(examples);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  interface PatentInfo {
+    title: string;
+    tags: Array<string>;
+    status: string;
+    patentId: string;
+    url: string;
+  }
 
   const handleTabClick = (tab: String) => {
     setSelectedTab(tab);
   };
+
+  async function storePatent(url:string) {
+    dispatch(storeFileURL(url));
+  }
+
+  function goToPatent(url:string) {
+    storePatent(url).then(
+      function(value) {router.push('/patent');},
+      function(error) {console.log(error);}
+    )
+  }
+
+  function renderPatentCard(entry:PatentInfo) {
+    return (
+      <PatentCard
+        title={entry.title}
+        tags={entry.tags}
+        status={entry.status}
+        patentId={entry.patentId}
+        onClick={() => goToPatent(entry.url)}
+      />);
+  }
 
 
   return (
@@ -36,54 +74,7 @@ export default function Library() {
         {selectedTab === 'Recent History' && (
           <>
           <div className="flex justify-center w-full space-x-4 ">
-            <PatentCard 
-              title="Microfluidic device for deformable beads enrichment and self-regulated ordering and encapsulation in droplets"
-              tags={['Biomed', 'Physical Device']}
-              status="Pending"
-              patentId="US20210331174A1"
-              onClick=""
-            />
-
-            <PatentCard 
-              title="Method and Apparatus for Image-Based Navigation"
-              tags={['Biomed']}
-              status="Pending"
-              patentId="US20240024042A1"
-              onClick=""
-            />
-
-            <PatentCard 
-              title="Single sided light-actuated microfluidic device with integrated mesh ground"
-              tags={['Biomed']}
-              status="Active"
-              patentId="US9815056B2"
-              onClick=""
-            />
-          </div>
-          <div className="flex justify-center w-full space-x-4 mt-4">
-            <PatentCard 
-              title="Microfluidic device for deformable beads enrichment and self-regulated ordering and encapsulation in droplets"
-              tags={['Biomed', 'Physical Device']}
-              status="Pending"
-              patentId="US20210331174A1"
-              onClick=""
-            />
-
-            <PatentCard 
-              title="Method and Apparatus for Image-Based Navigation"
-              tags={['Biomed']}
-              status="Pending"
-              patentId="US20240024042A1"
-              onClick=""
-            />
-
-            <PatentCard 
-              title="Single sided light-actuated microfluidic device with integrated mesh ground"
-              tags={['Biomed']}
-              status="Active"
-              patentId="US9815056B2"
-              onClick=""
-            />
+            {data.map((patent) => renderPatentCard(patent))}
           </div>
         </>
         )}

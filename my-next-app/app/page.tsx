@@ -28,7 +28,6 @@ export default function Home() {
 
   const handleUpload = (event: { target: { files: any; }; }) => {
     const file = event.target.files;
-    console.log(file);
     setUploadedFileName(file.name);
     setUploadedFile(file[0]);
   }
