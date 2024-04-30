@@ -1,16 +1,42 @@
+import { useCallback, useState } from 'react';
 import { Folder, File } from 'lucide-react';
+import CreateFolder from './CreateFolder';
 
-function SavePatent() {
+interface SavePatentProps {
+    onClose: () => void;
+    analyzePatent: () => void;
+    title: string | undefined;
+}
+
+function SavePatent({onClose, title, analyzePatent}: SavePatentProps) {
+    const [selectedFolder, setSelectedFolder] = useState<String | undefined>()
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    // Handles truncating the patent filename if it's too long
+    function formatTitle(title: string, maxLength: number = 28): string {
+        return title.length > maxLength ? `${title.substring(0, maxLength)}...` : title;
+    }
+
+    // Function to handle folder selection
+    const handleFolderClick = (folderName: string) => {
+        setSelectedFolder(folderName);
+    };
+
+    if (isModalVisible) {
+        return <CreateFolder onClose={() => setIsModalVisible(false)} analyzePatent={analyzePatent} />;
+    }
+
+
     return (
-        <div className="flex items-center justify-center min-h-screen"> {/* This div centers the modal */}
+        <div className="flex flex-col items-center justify-center min-h-screen"> {/* This div centers the modal */}
             <div className="flex flex-col h-[500px] w-[500px] rounded-xl border border-[#DCE4E7] bg-white shadow-lg p-4 pb-8 justify-between"> {/* Make this a flex column container */}
                 
                 <div>
-                    <button className="btn btn-circle btn-outline relative float-right">
+                    <div className="relative float-right cursor-pointer" onClick={onClose}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="#333333">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
-                    </button>
+                    </div>
 
                     <div className="pl-4 pr-4 -mt-4">
                         {/* Header */}
@@ -18,27 +44,23 @@ function SavePatent() {
                             <p className="text-lg font-medium whitespace-nowrap">Save the new patent</p>
                             <div className="flex items-center space-x-1 justify-center ">
                                 <File size={14}/>
-                                <p className="text-xs  whitespace-nowrap">Microfluidic device for device...</p>
+                                <p className="text-xs  whitespace-nowrap">{formatTitle(title!)}</p>
                             </div>
                         </div>
                         
-                        {/* Folders a user can select from*/}
+                        {/* Folders a user can select from */}
                         <div className="flex flex-col space-y-2">
-                            <div className="flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3" style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
-                                <Folder size={15}/>
-                                <p className="text-sm">Computer Vision for Medical</p>
-                            </div>
-
-                            <div className="flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3" style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
-                                <Folder size={15}/>
-                                <p className="text-sm">Biomedical Device</p>
-                            </div>
-
-                            <div className="flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3" style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}>
-                                <Folder size={15}/>
-                                <p className="text-sm">Innovation Strategy</p>
-                            </div>
-                           
+                            {["Computer Vision for Medical", "Biomedical Device", "Innovation Strategy"].map((folderName) => (
+                                <div
+                                    key={folderName}
+                                    className={`flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3 ${selectedFolder === folderName ? 'bg-[#BCD3DB]' : 'hover:bg-[#BCD3DB] cursor-pointer'}`}
+                                    style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}
+                                    onClick={() => handleFolderClick(folderName)}
+                                >
+                                    <Folder size={15}/>
+                                    <p className="text-sm">{folderName}</p>
+                                </div>
+                            ))}
                         </div>
 
                         
@@ -66,13 +88,24 @@ function SavePatent() {
 
                 {/* Buttons */}
                 <div className="flex justify-between items-center w-full pl-4 pr-4 mt-6">
-                    <button className="flex items-center justify-center h-[30px] px-4 py-2 bg-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-300 text-sm whitespace-nowrap">Create New Folder</button>
+                    <button 
+                        className="flex items-center justify-center h-[30px] px-4 py-2 bg-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-300 hover:text-black text-sm whitespace-nowrap"
+                        onClick={() => setIsModalVisible(true)}
+                        >
+                            Create New Folder
+                    </button>
                     <div className="flex space-x-4">
-                        <button className="flex items-center justify-center h-[30px] px-4 py-2 bg-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-300 text-sm whitespace-nowrap">Skip Saving</button>
-                        <button className="flex items-center justify-center h-[30px] px-4 py-2 bg-[#59808C] text-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-300 text-sm whitespace-nowrap">Save</button>
+                        <button 
+                            className="flex items-center justify-center h-[30px] px-4 py-2 bg-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-300 hover:text-black text-sm whitespace-nowrap"
+                            onClick={analyzePatent}>    
+                                Skip Saving
+                        </button>
+                        <button className="flex items-center justify-center h-[30px] px-4 py-2 bg-[#59808C] text-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-600 text-sm whitespace-nowrap">Save</button>
                     </div>
                 </div>
             </div>
+
+          
         </div>
     );
 }

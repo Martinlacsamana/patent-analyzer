@@ -14,9 +14,10 @@ const NavBar = () => {
             {/* If we had a brand name, we could put that here */}
 
 
-            <button className="text-black text-lg" onClick={() => router.push('/')}>
-                Our App
-            </button>
+            <div className=" hover:bg-[#59808C] text-black text-lg font-semibold hover:text-white ml-8 px-3 py-2 bg-white text-black rounded rounded-[9px]" onClick={() => router.push('/')}>
+               P.AI
+            </div>
+            
 
         </div>
         <div className="flex  space-x-4 h-[30px]">

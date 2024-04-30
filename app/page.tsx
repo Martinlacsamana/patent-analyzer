@@ -5,6 +5,8 @@ import PatentCard from "@/components/PatentCard";
 import PatentInfo from "@/components/PatentInfo";
 import PatentUpload from "@/components/PatentUpload";
 import PatentUploadLoading from "@/components/PatentUploadLoading";
+import {Download, Link2} from 'lucide-react'
+import SavePatent from '@/components/modals/SavePatent';
 
 import { useAppSelector, useAppDispatch } from '../lib/hooks'
 import {
@@ -15,15 +17,19 @@ export default function Home() {
 
   const [uploadedFile, setUploadedFile] = useState<File>();
   const [uploadedFileName, setUploadedFileName] = useState<string>();
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const data = useAppSelector(examples);
 
   const handleUpload = (event: { target: { files: any; }; }) => {
-    const file = event.target.files;
-    setUploadedFileName(file.name);
-    setUploadedFile(file[0]);
-  }
+    const file = event.target.files[0];
+    if (file) {
+      setUploadedFileName(file.name);
+      setUploadedFile(file);
+      setIsModalVisible(true); // Trigger the modal
+    }
+  };
 
   function dropHandler(ev: { preventDefault: () => void; dataTransfer: { items: any; files: any; }; }) {
     console.log("File(s) dropped");
@@ -38,6 +44,7 @@ export default function Home() {
         if (item.kind === "file") {
           const file = item.getAsFile();
           console.log(`… file[${i}].name = ${file.name}`);
+          setIsModalVisible(true); // Show the modal
         }
       });
     } else {
@@ -46,6 +53,7 @@ export default function Home() {
         console.log(`… file[${i}].name = ${file.name}`);
         setUploadedFileName(file.name);
         setUploadedFile(file);
+        setIsModalVisible(true); // Show the modal
       });
     }
   }
@@ -116,26 +124,30 @@ export default function Home() {
         {/* `Read a new patent` section */}
         <p className="text-xl font-normal leading-9 pt-[24px] pb-[12px]">Read a new patent</p>
         <div 
-          className="flex flex-col h-[230px] items-center justify-center gap-2.5 shrink-0 rounded-lg border border-[#DAE5EA] bg-white" 
+          className="flex flex-col h-[230px] items-center justify-center shrink-0 rounded-lg border border-[#DAE5EA] bg-white" 
           style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}
           id="drop_zone" onDrop={dropHandler} onDragOver={dragOverHandler}
           >
-          <div className="flex justify-center items-center space-x-2 pb-1">
-            <div>
-              <p className="text-base font-normal whitespace-nowrap">Upload or drop a file</p>
-              <form>
-                <input
-                    id='upload'
-                    className="text-sm cursor-pointer"
-                    type='file'
-                    onChange={handleUpload}
-                    value={uploadedFileName}
-                />
-              </form>
-              <button onClick={() => analyzePatent()}>Go</button>
+          <div className="flex flex-col justify-center items-center">
+            <div className='flex space-x-2'>
+              <div className="bg-custom-blue rounded-full p-1">
+                <Download size={18} color="#ffffff" />
+              </div>
+              <p className="text-xl font-normal whitespace-nowrap">Upload or drop a file</p>
             </div>
+              
+            <input
+                id='upload'
+                className="text-sm cursor-pointer w-52"
+                type='file'
+                onChange={handleUpload}
+            />
+            {/* <button onClick={() => analyzePatent()}>Go</button> */}
+           
           </div>
         </div>
+
+    
 
 
         {/* `Recent History` section */}
@@ -147,6 +159,13 @@ export default function Home() {
         </div>
 
       </main>
+      
+      {isModalVisible && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40">
+        <SavePatent title={uploadedFileName} onClose={() => setIsModalVisible(false)} analyzePatent={analyzePatent} />
+      </div>
+    )}
+
     </div>
   );
 }
