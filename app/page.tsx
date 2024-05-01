@@ -11,7 +11,7 @@ import SavePatent from '@/components/modals/SavePatent';
 
 import { useAppSelector, useAppDispatch } from '../lib/hooks'
 import {
-  storeFile, examples
+  storeFile, patents
 } from '../lib/features/analyzeSlice'
 
 export default function Home() {
@@ -21,7 +21,7 @@ export default function Home() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const data = useAppSelector(examples);
+  const data = useAppSelector(patents);
 
   const handleUpload = (event: { target: { files: any; }; }) => {
     const file = event.target.files[0];
@@ -67,6 +67,8 @@ export default function Home() {
   async function storeNewPatent(url:string) {
     const uploadedPatent = {
       title: "",
+      folder: "",
+      date: "",
       tags: [],
       status: "",
       patentId: "",
