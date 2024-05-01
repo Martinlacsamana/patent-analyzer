@@ -8,9 +8,9 @@ interface PatentCardProps {
 
 function PatentCard({info, onClick}:PatentCardProps) {
     return (
-        <div className="flex w-1/3 max-h-[230px] flex-col p-5 rounded-lg border border-[#DAE5EA] bg-white shadow">
+        <div className="flex w-1/3 max-h-[230px] flex-col p-5 rounded-lg border border-[#DAE5EA] bg-white shadow hover:bg-custom-navbar cursor-pointer">
             <div>
-                <p className="text-base font-normal h-[90px] cursor-pointer hover:text-custom-blue" onClick={onClick}>{info.title}</p>
+                <p className="text-base font-normal h-[90px] cursor-pointer" onClick={onClick}>{info.title}</p>
             </div>
           
           {/* Tags */}
