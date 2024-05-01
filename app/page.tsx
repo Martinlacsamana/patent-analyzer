@@ -63,11 +63,11 @@ export default function Home() {
     ev.preventDefault();
   }
 
-  async function storeNewPatent(url:string) {
+  async function storeNewPatent(url:string, folder:string, date:string) {
     const uploadedPatent = {
       title: "",
-      folder: "",
-      date: "",
+      folder: folder,
+      date: date,
       tags: [],
       status: "",
       patentId: "",
@@ -86,8 +86,8 @@ export default function Home() {
     dispatch(storeFile(info));
   }
 
-  function goToPatent(url:string) {
-    storeNewPatent(url).then(
+  function goToPatent(url:string, folder:string, date:string) {
+    storeNewPatent(url, folder, date).then(
       function(value) {router.push('/patent');},
       function(error) {console.log(error);}
     )
@@ -100,10 +100,10 @@ export default function Home() {
     )
   }
 
-  function analyzePatent() {
+  function analyzePatent(folder:string, date:string) {
     if (uploadedFile) {
       const url = URL.createObjectURL(uploadedFile);
-      goToPatent(url);
+      goToPatent(url, folder, date);
     }
   }
 
@@ -164,7 +164,7 @@ export default function Home() {
       
       {isModalVisible && (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40">
-        <SavePatent title={uploadedFileName} onClose={() => setIsModalVisible(false)} analyzePatent={analyzePatent} />
+        <SavePatent title={uploadedFileName} onClose={() => setIsModalVisible(false)} analyzePatent={(folder:string, date:string) => analyzePatent(folder, date)} />
       </div>
     )}
 

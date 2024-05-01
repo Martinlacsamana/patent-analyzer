@@ -7,7 +7,7 @@ import {
 
 interface CreateFolderProps {
     onClose: () => void;
-    analyzePatent: () => void;
+    analyzePatent: (folder:string, date:string) => void;
 }
 
 function CreateFolder({onClose, analyzePatent}: CreateFolderProps) {
@@ -19,8 +19,10 @@ function CreateFolder({onClose, analyzePatent}: CreateFolderProps) {
     // Function to handle folder selection
     const handleNew = (folderName: string) => {
         setSelectedFolder(folderName);
-        dispatch(addFolder({name: folderName, date: "Just now"}));
-        analyzePatent();
+        if(!(folderName in directories)) {
+          dispatch(addFolder({name: folderName, date: "Just now"}));  
+        }
+        analyzePatent(folderName, "Just now");
     };
 
     const onNameChange = (event: { target: { value: string; }; }) => {
@@ -44,13 +46,7 @@ function CreateFolder({onClose, analyzePatent}: CreateFolderProps) {
                     placeholder="Type here..."
                     value={name}
                     onChange={onNameChange}
-                 
-                 
-                 
                  />
-                 
-       
-             
 
                 {/* Buttons */}
                 <div className="flex justify-end items-center w-full pl-4 pr-4 mt-6 space-x-2">

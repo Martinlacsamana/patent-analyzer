@@ -1,21 +1,23 @@
 import { useCallback, useState } from 'react';
 import { Folder, File } from 'lucide-react';
 import CreateFolder from './CreateFolder';
-import { useAppSelector } from '../../lib/hooks';
+import PatentInfo from "@/components/PatentInfo";
+import { useAppSelector, useAppDispatch } from '../../lib/hooks';
 import {
-    folders
+    storeFile, folders
   } from '../../lib/features/analyzeSlice';
 
 interface SavePatentProps {
     onClose: () => void;
-    analyzePatent: () => void;
+    analyzePatent: (folder:string, date:string) => void;
     title: string | undefined;
 }
 
 function SavePatent({onClose, title, analyzePatent}: SavePatentProps) {
-    const [selectedFolder, setSelectedFolder] = useState<String | undefined>()
+    const [selectedFolder, setSelectedFolder] = useState<string>("")
     const [isModalVisible, setIsModalVisible] = useState(false);
     const directories = useAppSelector(folders);
+    const dispatch = useAppDispatch();
 
     // Handles truncating the patent filename if it's too long
     // function formatTitle(title: string, maxLength: number = 28): string {
@@ -28,7 +30,7 @@ function SavePatent({onClose, title, analyzePatent}: SavePatentProps) {
     };
 
     if (isModalVisible) {
-        return <CreateFolder onClose={() => setIsModalVisible(false)} analyzePatent={analyzePatent} />;
+        return <CreateFolder onClose={() => setIsModalVisible(false)} analyzePatent={(folder:string, date:string) => analyzePatent(folder, date)} />;
     }
 
 
@@ -58,7 +60,7 @@ function SavePatent({onClose, title, analyzePatent}: SavePatentProps) {
                             {directories.map((folder) => (
                                 <div
                                     key={folder.name}
-                                    className={`flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3 ${selectedFolder === folder.name ? 'bg-[#BCD3DB]' : 'hover:bg-[#BCD3DB] cursor-pointer'}`}
+                                    className={`flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3 ${selectedFolder === folder.name ? '!bg-[#BCD3DB]' : 'hover:bg-[#BCD3DB] cursor-pointer'}`}
                                     style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}
                                     onClick={() => handleFolderClick(folder.name)}
                                 >
@@ -102,10 +104,10 @@ function SavePatent({onClose, title, analyzePatent}: SavePatentProps) {
                     <div className="flex space-x-4">
                         <button 
                             className="flex items-center justify-center h-[30px] px-4 py-2 bg-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-300 hover:text-black text-sm whitespace-nowrap"
-                            onClick={analyzePatent}>    
+                            onClick={() => analyzePatent("","Just now")}>
                                 Skip Saving
                         </button>
-                        <button className="flex items-center justify-center h-[30px] px-4 py-2 bg-[#59808C] text-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-600 text-sm whitespace-nowrap">Save</button>
+                        <button className="flex items-center justify-center h-[30px] px-4 py-2 bg-[#59808C] text-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-600 text-sm whitespace-nowrap" onClick={() => analyzePatent(selectedFolder,"Just now")}>Save</button>
                     </div>
                 </div>
             </div>
