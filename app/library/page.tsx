@@ -6,14 +6,18 @@ import FolderCard from '@/components/FolderCard';
 import PatentInfo from "@/components/PatentInfo";
 import {useRouter} from 'next/navigation';
 import { useAppSelector, useAppDispatch } from '../../lib/hooks';
+import SelectFromFolder from '@/components/modals/SelectFromFolder';
+import MyProfile from '@/components/modals/MyProfile';
 import {
   storeFile, patents, folders
 } from '../../lib/features/analyzeSlice';
 
 export default function Library() {
   const [selectedTab, setSelectedTab] = useState<String>('Recent History');
+  const [isModalVisible, setIsModalVisible] = useState<Boolean>(false)
   const data = useAppSelector(patents);
   const directories = useAppSelector(folders);
+
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -73,8 +77,10 @@ export default function Library() {
         {/* `Workspace` section */}
         {selectedTab === 'Workspace' && (
           <>
+
+     
           <div className="flex flex-wrap gap-4 w-full">
-              {directories.map(folder => <FolderCard title={folder.name} date={folder.date}/>)}
+              {directories.map(folder => <FolderCard title={folder.name} date={folder.date} setIsModalVisible={setIsModalVisible}/>)}
           </div>
           </>
         )}
@@ -82,6 +88,15 @@ export default function Library() {
 
 
       </main>
+      {isModalVisible && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40">
+        <SelectFromFolder onClose={() => setIsModalVisible(false)} />
+      </div>
+      )} 
+  
+
+      
+      
     </div>
   );
 }
