@@ -14,6 +14,9 @@ export interface AnalyzeState {
   folders: Array<Folder>,
 }
 
+
+
+
 // Define the initial state using that type
 const initialState: AnalyzeState = {
   selectedPatent: {

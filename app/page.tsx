@@ -8,12 +8,11 @@ import PatentUploadLoading from "@/components/PatentUploadLoading";
 import {Download, Link2} from 'lucide-react'
 import SavePatent from '@/components/modals/SavePatent';
 import pdfToText from "react-pdftotext";
-
-
 import { useAppSelector, useAppDispatch } from '../lib/hooks'
 import {
   storeFile, fillInAnalysis, addPatent, patents
 } from '../lib/features/analyzeSlice'
+
 
 export default function Home() {
 
@@ -94,7 +93,7 @@ export default function Home() {
       function(value) {router.push('/patent');},
       function(error) {console.log(error);}
     )
-    }
+  }
 
   function goToRecent(info:PatentInfo) {
     storePatent(info).then(
