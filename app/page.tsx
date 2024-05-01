@@ -7,6 +7,7 @@ import PatentUpload from "@/components/PatentUpload";
 import PatentUploadLoading from "@/components/PatentUploadLoading";
 import {Download, Link2} from 'lucide-react'
 import SavePatent from '@/components/modals/SavePatent';
+import pdfToText from "react-pdftotext";
 
 
 import { useAppSelector, useAppDispatch } from '../lib/hooks'
@@ -83,6 +84,28 @@ export default function Home() {
     dispatch(storeFile(uploadedPatent));
   }
 
+  async function getSummary(patent_text: string, dummy: boolean=false) {
+    if (dummy){
+      return "bruh";
+    }
+    const response = await fetch(
+      'https://noggin.rea.gent/unaware-narwhal-7693',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer rg_v1_j0rj8cvquknfvmazs4itkskl736tclt8xc1j_ngk',
+        },
+        body: JSON.stringify({
+          // replace "bruh" with patent_text
+          "patent": patent_text,
+        }),
+      }
+    ).then(response => response.text());
+    return response;
+  }
+
+
   async function storePatent(info:PatentInfo) {
     dispatch(storeFile(info));
   }
@@ -92,7 +115,7 @@ export default function Home() {
       function(value) {router.push('/patent');},
       function(error) {console.log(error);}
     )
-  }
+    }
 
   function goToRecent(info:PatentInfo) {
     storePatent(info).then(
@@ -100,10 +123,17 @@ export default function Home() {
       function(error) {console.log(error);}
     )
   }
-
+  
   function analyzePatent(folder:string, date:string) {
+    let patent_text: string = "";
     if (uploadedFile) {
       const url = URL.createObjectURL(uploadedFile);
+      pdfToText(uploadedFile)
+        .then((text: string) => {
+          patent_text = text;
+          console.log(text);
+        })
+        .catch((error: Error) => console.error("Failed to extract text from pdf"));
       goToPatent(url, folder, date);
     }
   }
