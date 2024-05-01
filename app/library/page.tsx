@@ -6,12 +6,15 @@ import FolderCard from '@/components/FolderCard';
 import PatentInfo from "@/components/PatentInfo";
 import {useRouter} from 'next/navigation';
 import { useAppSelector, useAppDispatch } from '../../lib/hooks';
+import SelectFromFolder from '@/components/modals/SelectFromFolder';
+import MyProfile from '@/components/modals/MyProfile';
 import {
   storeFile, examples
 } from '../../lib/features/analyzeSlice';
 
 export default function Library() {
   const [selectedTab, setSelectedTab] = useState<String>('Recent History');
+  const [isModalVisible, setIsModalVisible] = useState<Boolean>(false)
   const data = useAppSelector(examples);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -73,14 +76,14 @@ export default function Library() {
         {selectedTab === 'Workspace' && (
           <>
           <div className="grid grid-cols-3 gap-4 w-full ">
-              <FolderCard title="Computer Vision for Medi..." date="April 18, 2024"/>
-              <FolderCard title="Biomedical Device" date="April 16, 2024"/>
-              <FolderCard title="Inovation Strategy" date="April 12, 2024"/>
+              <FolderCard title="Computer Vision for Medi..." date="April 18, 2024" setIsModalVisible={setIsModalVisible}/>
+              <FolderCard title="Biomedical Device" date="April 16, 2024" setIsModalVisible={setIsModalVisible}/>
+              <FolderCard title="Inovation Strategy" date="April 12, 2024" setIsModalVisible={setIsModalVisible}/>
           </div>
 
           <div className="grid grid-cols-3 gap-4 w-full mt-4">
-              <FolderCard title="Method and Apparatus for..." date="1 hr ago"/>
-              <FolderCard title="Single sided light-actuate..." date="15:33 PM today"/>
+              <FolderCard title="Method and Apparatus for..." date="1 hr ago" setIsModalVisible={setIsModalVisible}/>
+              <FolderCard title="Single sided light-actuate..." date="15:33 PM today" setIsModalVisible={setIsModalVisible}/>
           </div>
           </>
         )}
@@ -88,6 +91,15 @@ export default function Library() {
 
 
       </main>
+      {isModalVisible && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40">
+        <SelectFromFolder onClose={() => setIsModalVisible(false)} />
+      </div>
+      )} 
+      <MyProfile/>
+
+      
+      
     </div>
   );
 }
