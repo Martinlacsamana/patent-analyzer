@@ -3,8 +3,10 @@ import { Folder, File } from 'lucide-react';
 import CreateFolder from './CreateFolder';
 import PatentInfo from "@/components/PatentInfo";
 import { useAppSelector, useAppDispatch } from '../../lib/hooks';
+import {useRouter} from 'next/navigation';
+
 import {
-  patents
+  storeFile, patents
 } from '../../lib/features/analyzeSlice';
 
 interface SelectFromFolderProps {
@@ -17,10 +19,14 @@ function SelectFromFolder({onClose, analyzePatent, folderName}: SelectFromFolder
     const [selectedPatent, setSelectedPatent] = useState<File | undefined>();
     const [selectedPatentName, setSelectedPatentName] = useState<String | undefined>();
     const data = useAppSelector(patents);
+    const dispatch = useAppDispatch();
+    const router = useRouter();
 
     // Function to handle folder selection
-    const handlePatentSelection = (folderName: string) => {
-        setSelectedPatentName(folderName);
+    const handlePatentSelection = (patent: PatentInfo) => {
+        setSelectedPatentName(patent.title);
+        dispatch(storeFile(patent));
+        router.push('/patent');
     };
 
 
@@ -49,7 +55,7 @@ function SelectFromFolder({onClose, analyzePatent, folderName}: SelectFromFolder
                                     key={patent.title}
                                     className={`flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3 ${selectedPatentName === patent.title ? 'bg-[#BCD3DB]' : 'hover:bg-[#BCD3DB] cursor-pointer'}`}
                                     style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}
-                                    onClick={() => handlePatentSelection(patent.title)}
+                                    onClick={() => handlePatentSelection(patent)}
                                 >
                                     <File size={15} color="#A0A0A1"/>
                                     <p className="text-sm truncate overflow-ellipsis">{patent.title}</p>
