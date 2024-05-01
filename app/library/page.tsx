@@ -14,6 +14,7 @@ import {
 
 export default function Library() {
   const [selectedTab, setSelectedTab] = useState<String>('Recent History');
+  const [selectedFolder, setSelectedFolder] = useState<string>("");
   const [isModalVisible, setIsModalVisible] = useState<Boolean>(false)
   const data = useAppSelector(patents);
   const directories = useAppSelector(folders);
@@ -80,7 +81,7 @@ export default function Library() {
 
      
           <div className="flex flex-wrap gap-4 w-full">
-              {directories.map(folder => <FolderCard title={folder.name} date={folder.date} setIsModalVisible={setIsModalVisible}/>)}
+              {directories.map(folder => <FolderCard title={folder.name} date={folder.date} handleClick={() => setSelectedFolder(folder.name)} setIsModalVisible={setIsModalVisible}/>)}
           </div>
           </>
         )}
@@ -90,7 +91,7 @@ export default function Library() {
       </main>
       {isModalVisible && (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40">
-        <SelectFromFolder onClose={() => setIsModalVisible(false)} />
+        <SelectFromFolder onClose={() => setIsModalVisible(false)} folderName={selectedFolder} />
       </div>
       )} 
   
