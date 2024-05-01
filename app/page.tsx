@@ -84,6 +84,7 @@ export default function Home() {
   }
 
   async function getSummary(patent_text: string) {
+    return "bruh";
     const response = await fetch(
       'https://noggin.rea.gent/unaware-narwhal-7693',
       {
