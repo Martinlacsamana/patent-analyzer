@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "/library/page": "app/library/page.js"
-=======
-  "/library/page": "app/library/page.js",
   "/page": "app/page.js",
-  "/patent/page": "app/patent/page.js"
->>>>>>> main
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/library/page": "app/library/page.js"
 }

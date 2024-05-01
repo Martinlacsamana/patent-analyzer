@@ -580,38 +580,17 @@ video {
 .mt-10 {
   margin-top: 2.5rem;
 }
-.mt-4 {
-  margin-top: 1rem;
-}
 .mt-6 {
   margin-top: 1.5rem;
 }
 .mt-\[-1\.00px\] {
   margin-top: -1.00px;
 }
-<<<<<<< HEAD
-=======
-.mr-3 {
-  margin-right: 0.75rem;
-}
-.ml-3 {
-  margin-left: 0.75rem;
-}
-.mr-10 {
-  margin-right: 2.5rem;
-}
-.mr-2 {
-  margin-right: 0.5rem;
-}
->>>>>>> main
 .flex {
   display: flex;
 }
 .inline-flex {
   display: inline-flex;
-}
-.grid {
-  display: grid;
 }
 .h-5 {
   height: 1.25rem;
@@ -655,12 +634,6 @@ video {
 .h-\[90px\] {
   height: 90px;
 }
-<<<<<<< HEAD
-=======
-.h-10 {
-  height: 2.5rem;
-}
->>>>>>> main
 .max-h-\[230px\] {
   max-height: 230px;
 }
@@ -697,12 +670,9 @@ video {
 .w-8 {
   width: 2rem;
 }
-<<<<<<< HEAD
 .w-\[350px\] {
   width: 350px;
 }
-=======
->>>>>>> main
 .w-\[400px\] {
   width: 400px;
 }
@@ -721,12 +691,6 @@ video {
 .w-full {
   width: 100%;
 }
-<<<<<<< HEAD
-=======
-.w-1\/4 {
-  width: 25%;
-}
->>>>>>> main
 .flex-\[0_0_auto\] {
   flex: 0 0 auto;
 }
@@ -744,12 +708,6 @@ video {
 }
 .cursor-pointer {
   cursor: pointer;
-}
-.grid-flow-row {
-  grid-auto-flow: row;
-}
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .flex-col {
   flex-direction: column;
@@ -1002,7 +960,6 @@ video {
 .p-\[92px_516px\] {
   padding: 92px 516px;
 }
-<<<<<<< HEAD
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1011,8 +968,6 @@ video {
   padding-left: 4rem;
   padding-right: 4rem;
 }
-=======
->>>>>>> main
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -1052,10 +1007,6 @@ video {
 .py-\[4px\] {
   padding-top: 4px;
   padding-bottom: 4px;
-}
-.py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
 }
 .pb-1 {
   padding-bottom: 0.25rem;
@@ -1117,24 +1068,6 @@ video {
 .pt-\[6px\] {
   padding-top: 6px;
 }
-<<<<<<< HEAD
-=======
-.pr-3 {
-  padding-right: 0.75rem;
-}
-.pr-2 {
-  padding-right: 0.5rem;
-}
-.pr-7 {
-  padding-right: 1.75rem;
-}
-.pl-5 {
-  padding-left: 1.25rem;
-}
-.pr-10 {
-  padding-right: 2.5rem;
-}
->>>>>>> main
 .text-center {
   text-align: center;
 }
@@ -1266,13 +1199,10 @@ button:hover {
   color: #FFFFFF;
 }
 
-<<<<<<< HEAD
 .hover\:cursor-pointer:hover {
   cursor: pointer;
 }
 
-=======
->>>>>>> main
 .hover\:bg-\[\#59808C\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(89 128 140 / var(--tw-bg-opacity));
@@ -1283,7 +1213,6 @@ button:hover {
   background-color: rgb(188 211 219 / var(--tw-bg-opacity));
 }
 
-<<<<<<< HEAD
 .hover\:bg-custom-navbar:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(218 229 234 / var(--tw-bg-opacity));
@@ -1291,10 +1220,6 @@ button:hover {
 
 .hover\:bg-gray-300:hover {
   --tw-bg-opacity: 1;
-=======
-.hover\:bg-gray-300:hover {
-  --tw-bg-opacity: 1;
->>>>>>> main
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
@@ -1308,14 +1233,6 @@ button:hover {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-<<<<<<< HEAD
-=======
-.hover\:text-custom-blue:hover {
-  --tw-text-opacity: 1;
-  color: rgb(89 128 140 / var(--tw-text-opacity));
-}
-
->>>>>>> main
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));

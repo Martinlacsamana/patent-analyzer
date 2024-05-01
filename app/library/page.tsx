@@ -93,7 +93,7 @@ export default function Library() {
         <SelectFromFolder onClose={() => setIsModalVisible(false)} />
       </div>
       )} 
-      <MyProfile/>
+  
 
       
       
