@@ -66,7 +66,7 @@ export default function Home() {
   }
 
   async function storeNewPatent(url: string, patent_text: string) {
-    const summary_text = await getSummary(patent_text);
+    const summary_text = await getSummary(patent_text, true);
     const uploadedPatent = {
       title: "",
       tags: [],
@@ -83,8 +83,10 @@ export default function Home() {
     dispatch(storeFile(uploadedPatent));
   }
 
-  async function getSummary(patent_text: string) {
-    return "bruh";
+  async function getSummary(patent_text: string, dummy: boolean=false) {
+    if (dummy){
+      return "bruh";
+    }
     const response = await fetch(
       'https://noggin.rea.gent/unaware-narwhal-7693',
       {
@@ -95,7 +97,7 @@ export default function Home() {
         },
         body: JSON.stringify({
           // replace "bruh" with patent_text
-          "patent": "bruh",
+          "patent": patent_text,
         }),
       }
     ).then(response => response.text());
