@@ -12,7 +12,7 @@ import pdfToText from "react-pdftotext";
 
 import { useAppSelector, useAppDispatch } from '../lib/hooks'
 import {
-  storeFile, patents
+  storeFile, fillInAnalysis, addPatent, patents
 } from '../lib/features/analyzeSlice'
 
 export default function Home() {
@@ -82,27 +82,6 @@ export default function Home() {
       fulltext: "",
     }
     dispatch(storeFile(uploadedPatent));
-  }
-
-  async function getSummary(patent_text: string, dummy: boolean=false) {
-    if (dummy){
-      return "bruh";
-    }
-    const response = await fetch(
-      'https://noggin.rea.gent/unaware-narwhal-7693',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer rg_v1_j0rj8cvquknfvmazs4itkskl736tclt8xc1j_ngk',
-        },
-        body: JSON.stringify({
-          // replace "bruh" with patent_text
-          "patent": patent_text,
-        }),
-      }
-    ).then(response => response.text());
-    return response;
   }
 
 

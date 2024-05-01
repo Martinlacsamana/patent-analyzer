@@ -95,11 +95,21 @@ export const analyzeSlice = createSlice({
     },
     addFolder: (state, action: PayloadAction<Folder>) => {
       state.folders.push(action.payload);
-    }
+    },
+    addPatent: (state) => {
+      state.patents.push(state.selectedPatent);
+    },
+    fillInAnalysis: (state, action: PayloadAction<string>) => {
+      const response = action.payload.split(/\r?\n/);
+      state.selectedPatent.problem = response[0];
+      state.selectedPatent.solution = response[1];
+      state.selectedPatent.summary = response[2];
+    },
+    
   }
 })
 
-export const { storeFile, addFolder } = analyzeSlice.actions
+export const { storeFile, addFolder, addPatent, fillInAnalysis } = analyzeSlice.actions
 export const selectedPatent = (state: RootState) => state.analyze.selectedPatent
 export const patents = (state: RootState) => state.analyze.patents
 export const folders = (state: RootState) => state.analyze.folders
