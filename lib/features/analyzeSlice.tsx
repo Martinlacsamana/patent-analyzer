@@ -92,11 +92,14 @@ export const analyzeSlice = createSlice({
     // Use the PayloadAction type to declare the contents of `action.payload`
     storeFile: (state, action: PayloadAction<PatentInfo>) => {
       state.selectedPatent = action.payload;
+    },
+    addFolder: (state, action: PayloadAction<Folder>) => {
+      state.folders.push(action.payload);
     }
   }
 })
 
-export const { storeFile } = analyzeSlice.actions
+export const { storeFile, addFolder } = analyzeSlice.actions
 export const selectedPatent = (state: RootState) => state.analyze.selectedPatent
 export const patents = (state: RootState) => state.analyze.patents
 export const folders = (state: RootState) => state.analyze.folders

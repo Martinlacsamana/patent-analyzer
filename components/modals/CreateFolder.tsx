@@ -1,5 +1,9 @@
 import { useCallback, useState } from 'react';
 import { Folder, File } from 'lucide-react';
+import { useAppSelector, useAppDispatch } from '../../lib/hooks';
+import {
+    addFolder, folders
+  } from '../../lib/features/analyzeSlice';
 
 interface CreateFolderProps {
     onClose: () => void;
@@ -7,12 +11,21 @@ interface CreateFolderProps {
 }
 
 function CreateFolder({onClose, analyzePatent}: CreateFolderProps) {
-    const [selectedFolder, setSelectedFolder] = useState<String | undefined>()
+    const [selectedFolder, setSelectedFolder] = useState<String | undefined>();
+    const [name, setName] = useState<string>("");
+    const dispatch = useAppDispatch();
+    const directories = useAppSelector(folders);
 
     // Function to handle folder selection
-    const handleFolderClick = (folderName: string) => {
+    const handleNew = (folderName: string) => {
         setSelectedFolder(folderName);
+        dispatch(addFolder({name: folderName, date: "Just now"}));
+        analyzePatent();
     };
+
+    const onNameChange = (event: { target: { value: string; }; }) => {
+        setName(event.target.value);
+      };
 
 
     return (
@@ -29,6 +42,8 @@ function CreateFolder({onClose, analyzePatent}: CreateFolderProps) {
                     className="px-4 py-2 border border=[#C1C1C1] rounded rounded-lg"
                     type=""
                     placeholder="Type here..."
+                    value={name}
+                    onChange={onNameChange}
                  
                  
                  
@@ -46,7 +61,7 @@ function CreateFolder({onClose, analyzePatent}: CreateFolderProps) {
                     </button>
                     <button 
                         className="flex items-center justify-center h-[30px] px-4 py-2 bg-[#59808C] text-white border border-[#DCE4E7] rounded-md rounded hover:bg-gray-600 text-sm whitespace-nowrap"
-                        onClick={analyzePatent}   
+                        onClick={() => handleNew(name)}   
                         >
                             Create
                     </button>
