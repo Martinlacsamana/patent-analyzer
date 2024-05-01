@@ -1,5 +1,11 @@
 {
   "pages": {
+    "/patent/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/patent/page.css",
+      "static/chunks/app/patent/page.js"
+    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -11,11 +17,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/patent/page": [
+    "/library/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/patent/page.css",
-      "static/chunks/app/patent/page.js"
+      "static/chunks/app/library/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
