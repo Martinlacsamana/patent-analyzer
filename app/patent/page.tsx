@@ -5,10 +5,15 @@ import { useAppSelector, useAppDispatch } from '../../lib/hooks';
 import { selectedPatent } from '../../lib/features/analyzeSlice';
 import { SendHorizonal } from "lucide-react";
 import PatentInfo from "@/components/PatentInfo";
+import {useRouter} from 'next/navigation';
+import {
+  fillInAnalysis, addPatent
+} from '../../lib/features/analyzeSlice'
 
 export default function Patent() {
 
   const patent = useAppSelector(selectedPatent);
+
   const [textAreaValue, setTextAreaValue] = useState(''); // State to hold the textarea value
   const [apiResponse, setApiResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);  // State to track loading status
@@ -40,6 +45,38 @@ export default function Patent() {
     }
     
 };
+
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  async function summarize(dummy: boolean=false) {
+    if (dummy){
+      return "bruh";
+    }
+    const response = await fetch(
+      'https://noggin.rea.gent/unaware-narwhal-7693',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer rg_v1_j0rj8cvquknfvmazs4itkskl736tclt8xc1j_ngk',
+        },
+        body: JSON.stringify({
+          // replace "bruh" with patent_text
+          "patent": patent,
+        }),
+      }
+    ).then(response => response.text());
+
+    dispatch(fillInAnalysis(response));
+    dispatch(addPatent());
+    }
+
+    summarize().then(
+      function(value) {console.log('success')}, // turn off loader
+      function(error) {console.log(error);}
+    )
+
 
     return (
       

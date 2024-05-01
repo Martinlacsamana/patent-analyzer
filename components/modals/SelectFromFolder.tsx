@@ -1,19 +1,32 @@
 import { useCallback, useState } from 'react';
 import { Folder, File } from 'lucide-react';
 import CreateFolder from './CreateFolder';
+import PatentInfo from "@/components/PatentInfo";
+import { useAppSelector, useAppDispatch } from '../../lib/hooks';
+import {useRouter} from 'next/navigation';
+
+import {
+  storeFile, patents
+} from '../../lib/features/analyzeSlice';
 
 interface SelectFromFolderProps {
     onClose: () => void;
     analyzePatent?: () => void;
+    folderName: string;
 }
 
-function SelectFromFolder({onClose, analyzePatent}: SelectFromFolderProps) {
-    const [selectedPatent, setSelectedPatent] = useState<File | undefined>()
-    const [selectedPatentName, setSelectedPatentName] = useState<String | undefined>()
+function SelectFromFolder({onClose, analyzePatent, folderName}: SelectFromFolderProps) {
+    const [selectedPatent, setSelectedPatent] = useState<File | undefined>();
+    const [selectedPatentName, setSelectedPatentName] = useState<String | undefined>();
+    const data = useAppSelector(patents);
+    const dispatch = useAppDispatch();
+    const router = useRouter();
 
     // Function to handle folder selection
-    const handlePatentSelection = (folderName: string) => {
-        setSelectedPatentName(folderName);
+    const handlePatentSelection = (patent: PatentInfo) => {
+        setSelectedPatentName(patent.title);
+        dispatch(storeFile(patent));
+        router.push('/patent');
     };
 
 
@@ -37,17 +50,17 @@ function SelectFromFolder({onClose, analyzePatent}: SelectFromFolderProps) {
                         
                         {/* Patents a user can select from */}
                         <div className="flex flex-col space-y-2">
-                            {["Computer Vision for Medical", "Biomedical Device", "Innovation Strategy"].map((patentName) => (
+                            {data.map((patent) => (patent.folder === folderName ?
                                 <div
-                                    key={patentName}
-                                    className={`flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3 ${selectedPatentName === patentName ? 'bg-[#BCD3DB]' : 'hover:bg-[#BCD3DB] cursor-pointer'}`}
+                                    key={patent.title}
+                                    className={`flex items-center space-x-2 border border-[#DAE5EA] rounded-xl bg-white py-2 px-3 ${selectedPatentName === patent.title ? 'bg-[#BCD3DB]' : 'hover:bg-[#BCD3DB] cursor-pointer'}`}
                                     style={{ boxShadow: '0px 1px 10px 0px rgba(0, 0, 0, 0.10)' }}
-                                    onClick={() => handlePatentSelection(patentName)}
+                                    onClick={() => handlePatentSelection(patent)}
                                 >
                                     <File size={15} color="#A0A0A1"/>
-                                    <p className="text-sm">{patentName}</p>
+                                    <p className="text-sm truncate overflow-ellipsis">{patent.title}</p>
                                 </div>
-                            ))}
+                            : <div/>))}
                         </div>
                     </div>
                 </div>

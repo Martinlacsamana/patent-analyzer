@@ -3,16 +3,23 @@ import { Folder } from 'lucide-react'
 interface FolderCardProps {
     title: string;
     date: string;
+    handleClick: () => void;
     setIsModalVisible: React.Dispatch<React.SetStateAction<Boolean>>;
   }
 
-function FolderCard({title, date, setIsModalVisible}:FolderCardProps) {
+function FolderCard({title, date, handleClick, setIsModalVisible}:FolderCardProps) {
+
+    function handleFolderClick() {
+        handleClick();
+        setIsModalVisible(true)
+    }
+    
     return (
 
         <div 
             className="flex flex-col w-full h-[100px] space-y-5 flex-col p-5 rounded-lg border border-[#DAE5EA] bg-white shadow hover:bg-custom-navbar cursor-pointer "
             style={{width: "20vw"}}
-            onClick={() => setIsModalVisible(true)}
+            onClick={() => handleFolderClick()}
             >
             
 

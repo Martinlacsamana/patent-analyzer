@@ -10,7 +10,7 @@ import SavePatent from '@/components/modals/SavePatent';
 import pdfToText from "react-pdftotext";
 import { useAppSelector, useAppDispatch } from '../lib/hooks'
 import {
-  storeFile, patents
+  storeFile, fillInAnalysis, addPatent, patents
 } from '../lib/features/analyzeSlice'
 
 
@@ -64,12 +64,11 @@ export default function Home() {
     ev.preventDefault();
   }
 
-  async function storeNewPatent(url: string, patent_text: string) {
-    const summary_text = await getSummary(patent_text, true);
+  async function storeNewPatent(url:string, folder:string, date:string) {
     const uploadedPatent = {
       title: "",
-      folder: "",
-      date: "",
+      folder: folder,
+      date: date,
       tags: [],
       status: "",
       patentId: "",
@@ -78,31 +77,10 @@ export default function Home() {
       problemKeywords: [],
       solution: "",
       solutionKeywords: [],
-      summary: summary_text,
-      fulltext: patent_text,
+      summary: "",
+      fulltext: "",
     }
     dispatch(storeFile(uploadedPatent));
-  }
-
-  async function getSummary(patent_text: string, dummy: boolean=false) {
-    if (dummy){
-      return "bruh";
-    }
-    const response = await fetch(
-      'https://noggin.rea.gent/unaware-narwhal-7693',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer rg_v1_j0rj8cvquknfvmazs4itkskl736tclt8xc1j_ngk',
-        },
-        body: JSON.stringify({
-          // replace "bruh" with patent_text
-          "patent": patent_text,
-        }),
-      }
-    ).then(response => response.text());
-    return response;
   }
 
 
@@ -110,8 +88,8 @@ export default function Home() {
     dispatch(storeFile(info));
   }
 
-  function goToPatent(url:string, patent_text:string) {
-    storeNewPatent(url, patent_text).then(
+  function goToPatent(url:string, folder:string, date:string) {
+    storeNewPatent(url, folder, date).then(
       function(value) {router.push('/patent');},
       function(error) {console.log(error);}
     )
@@ -124,7 +102,7 @@ export default function Home() {
     )
   }
   
-  function analyzePatent() {
+  function analyzePatent(folder:string, date:string) {
     let patent_text: string = "";
     if (uploadedFile) {
       const url = URL.createObjectURL(uploadedFile);
@@ -134,7 +112,7 @@ export default function Home() {
           console.log(text);
         })
         .catch((error: Error) => console.error("Failed to extract text from pdf"));
-      goToPatent(url, patent_text);
+      goToPatent(url, folder, date);
     }
   }
 
@@ -195,7 +173,7 @@ export default function Home() {
       
       {isModalVisible && (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40">
-        <SavePatent title={uploadedFileName} onClose={() => setIsModalVisible(false)} analyzePatent={analyzePatent} />
+        <SavePatent title={uploadedFileName} onClose={() => setIsModalVisible(false)} analyzePatent={(folder:string, date:string) => analyzePatent(folder, date)} />
       </div>
     )}
 
