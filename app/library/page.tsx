@@ -13,6 +13,7 @@ import {
 export default function Library() {
   const [selectedTab, setSelectedTab] = useState<String>('Recent History');
   const data = useAppSelector(patents);
+  const directories = useAppSelector(folders);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -72,15 +73,8 @@ export default function Library() {
         {/* `Workspace` section */}
         {selectedTab === 'Workspace' && (
           <>
-          <div className="grid grid-cols-3 gap-4 w-full ">
-              <FolderCard title="Computer Vision for Medi..." date="April 18, 2024"/>
-              <FolderCard title="Biomedical Device" date="April 16, 2024"/>
-              <FolderCard title="Inovation Strategy" date="April 12, 2024"/>
-          </div>
-
-          <div className="grid grid-cols-3 gap-4 w-full mt-4">
-              <FolderCard title="Method and Apparatus for..." date="1 hr ago"/>
-              <FolderCard title="Single sided light-actuate..." date="15:33 PM today"/>
+          <div className="flex flex-wrap gap-4 w-full">
+              {directories.map(folder => <FolderCard title={folder.name} date={folder.date}/>)}
           </div>
           </>
         )}
