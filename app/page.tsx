@@ -107,11 +107,11 @@ export default function Home() {
   }
 
   function goToPatent(url:string, patent_text:string) {
-    router.push('/patent');
     storeNewPatent(url, patent_text).then(
       function(value) {console.log("worked");},
       function(error) {console.log(error);}
     )
+    router.push('/patent');
   }
 
   function goToRecent(info:PatentInfo) {
