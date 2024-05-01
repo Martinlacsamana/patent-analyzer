@@ -1,4 +1,4 @@
-// File: /Users/martinlacsamana/Documents/160/project/patent-analyzer/app/page.tsx
+// File: /Users/jamiewalton/Desktop/CS160/patent-analyzer/app/page.tsx
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

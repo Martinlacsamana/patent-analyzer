@@ -1,5 +1,7 @@
 export default interface PatentInfo {
     title: string;
+    folder: string,
+    date: string,
     tags: Array<string>;
     status: string;
     patentId: string;

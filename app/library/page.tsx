@@ -7,12 +7,12 @@ import PatentInfo from "@/components/PatentInfo";
 import {useRouter} from 'next/navigation';
 import { useAppSelector, useAppDispatch } from '../../lib/hooks';
 import {
-  storeFile, examples
+  storeFile, patents, folders
 } from '../../lib/features/analyzeSlice';
 
 export default function Library() {
   const [selectedTab, setSelectedTab] = useState<String>('Recent History');
-  const data = useAppSelector(examples);
+  const data = useAppSelector(patents);
   const dispatch = useAppDispatch();
   const router = useRouter();
 

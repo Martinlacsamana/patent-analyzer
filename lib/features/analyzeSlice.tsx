@@ -1,30 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store';
+import PatentInfo from "@/components/PatentInfo";
 
-// Define a type for the slice state
-interface PatentInfo {
-  title: string;
-  tags: Array<string>;
-  status: string;
-  patentId: string;
-  url: string;
-  problem: string;
-  problemKeywords: Array<string>;
-  solution: string;
-  solutionKeywords: Array<string>;
-  summary: string;
-  fulltext: string;
+
+export interface Folder {
+  name: string;
+  date: string,
 }
 
 export interface AnalyzeState {
   selectedPatent: PatentInfo,
-  examples: Array<PatentInfo>
+  patents: Array<PatentInfo>,
+  folders: Array<Folder>,
 }
 
 // Define the initial state using that type
 const initialState: AnalyzeState = {
   selectedPatent: {
     title: "",
+    folder: "",
+    date: "",
     tags: [""],
     status: "",
     patentId: "",
@@ -36,9 +31,11 @@ const initialState: AnalyzeState = {
     summary: "",
     fulltext: "",
   },
-  examples: [
+  patents: [
     {
       title: "Microfluidic device for deformable beads enrichment and self-regulated ordering and encapsulation in droplets",
+      folder: "Microfluidics",
+      date: "",
       tags: ["Microfluidics", "Droplets"],
       status: "Pending",
       patentId: "US20210331174A1",
@@ -52,6 +49,8 @@ const initialState: AnalyzeState = {
     },
     {
       title: "Method and Apparatus for Image-Based Navigation",
+      folder: "Skeletal Navigation",
+      date: "",
       tags: ["MapNav", "Surgical"],
       status: "Pending",
       patentId: "US20240024042A1",
@@ -65,6 +64,8 @@ const initialState: AnalyzeState = {
     },
     {
       title: "Single sided light-actuated microfluidic device with integrated mesh ground",
+      folder: "Microfluidics",
+      date: "",
       tags: ["Microfluidics", "Optowetting"],
       status: "Active",
       patentId: "US9815056B2",
@@ -76,6 +77,10 @@ const initialState: AnalyzeState = {
       summary: "",
       fulltext: ""
     },
+  ],
+  folders: [
+    {name: "Microfluidics", date: "April 29, 2024"}, 
+    {name: "Skeletal Navigation", date: "15:33 PM today"}
   ]
 }
 
@@ -93,5 +98,6 @@ export const analyzeSlice = createSlice({
 
 export const { storeFile } = analyzeSlice.actions
 export const selectedPatent = (state: RootState) => state.analyze.selectedPatent
-export const examples = (state: RootState) => state.analyze.examples
+export const patents = (state: RootState) => state.analyze.patents
+export const folders = (state: RootState) => state.analyze.folders
 export default analyzeSlice.reducer
