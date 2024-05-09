@@ -4,10 +4,10 @@ A Next.js website for analyzing biomedical patents.
 ## How to Build
 **Before starting building the site, make sure that npm is properly installed on your computer.**
 To build the website for your local host, run the following commands:
-'''
+```
 npm install
 npm run dev
-'''
+```
 The website should appear in your browser at [localhost:3000](localhost:3000) and be accessible through this port until you terminate the `npm run dev` command.
 
 ## Disclaimer
