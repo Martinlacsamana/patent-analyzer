@@ -60,7 +60,7 @@ function SelectFromFolder({onClose, analyzePatent, folderName}: SelectFromFolder
                                     <File size={15} color="#A0A0A1"/>
                                     <p className="text-sm truncate overflow-ellipsis">{patent.title}</p>
                                 </div>
-                            : <div/>))}
+                            : null))}
                         </div>
                     </div>
                 </div>

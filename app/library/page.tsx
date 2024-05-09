@@ -70,7 +70,26 @@ export default function Library() {
         {selectedTab === 'Recent History' && (
           <>
           <div className="flex justify-center w-full space-x-4 ">
-            {data.map((patent) => renderPatentCard(patent))}
+            <PatentCard 
+              title="Microfluidic device for deformable beads enrichment and self-regulated ordering and encapsulation in droplets"
+              tags={['Biomed', 'Physical Device']}
+              status="Pending"
+              patentId="US20210331174A1"
+            />
+
+            <PatentCard 
+              title="Method and Apparatus for Image-Based Navigation"
+              tags={['Biomed']}
+              status="Pending"
+              patentId="US20240024042A1"
+            />
+
+            <PatentCard 
+              title="Single sided light-actuated microfluidic device with integrated mesh ground"
+              tags={['Biomed']}
+              status="Active"
+              patentId="US9815056B2"
+            />
           </div>
         </>
         )}
@@ -83,6 +102,9 @@ export default function Library() {
           <div className="flex flex-wrap gap-4 w-full">
               {directories.map(folder => <FolderCard title={folder.name} date={folder.date} handleClick={() => setSelectedFolder(folder.name)} setIsModalVisible={setIsModalVisible}/>)}
           </div>
+          <>
+      
+          </>
           </>
         )}
 
