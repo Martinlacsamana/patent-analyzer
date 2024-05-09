@@ -20,19 +20,19 @@ export interface AnalyzeState {
 // Define the initial state using that type
 const initialState: AnalyzeState = {
   selectedPatent: {
-    title: "",
-    folder: "",
-    date: "",
-    tags: [""],
-    status: "",
-    patentId: "",
-    url: "",
-    problem: "",
-    problemKeywords: [],
-    solution: "",
-    solutionKeywords: [],
-    summary: "",
-    fulltext: "",
+    title: "Microfluidic device for deformable beads enrichment and self-regulated ordering and encapsulation in droplets",
+      folder: "Microfluidics",
+      date: "",
+      tags: ["Microfluidics", "Droplets"],
+      status: "Pending",
+      patentId: "US20210331174A1",
+      url: "/examples/US20210331174A1.pdf",
+      problem: "The patent addresses the challenges of achieving robust ordered delivery of deformable beads in microfluidic devices, as well as the difficulty in achieving high percentage singlet encapsulation with a constant pressure source system.",
+      problemKeywords: ["microfluidics", "beads", "singlet encapsulation"],
+      solution: "The inventors developed a microfluidic device that can reliably achieve high percentage singlet encapsulation with a constant pressure source system. This was achieved through the development of a pinch and reservoir sequence system for beads concentrating and delivery frequency stabilizing, as well as the design of a long funnel to guide and align deformable beads into a single row, and a core design to achieve self-regulated beads in droplets encapsulation within a constant pressure system.",
+      solutionKeywords: ["pinch and reservoir", "funnel"],
+      summary: "This invention introduces a novel microfluidic device designed to improve the handling and processing of deformable beads in a controlled environment. The device features a series of inlets and microfluidic channels that facilitate the encapsulation of these beads into droplets, a method that is crucial for advancing laboratory assays such as single-cell analyses and other microreactor applications.",
+      fulltext: ""
   },
   patents: [
     {

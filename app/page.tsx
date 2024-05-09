@@ -144,7 +144,7 @@ export default function Home() {
               <div className="bg-custom-blue rounded-full p-1">
                 <Download size={18} color="#ffffff" />
               </div>
-              <p className="text-xl font-normal whitespace-nowrap">Upload or drop a file</p>
+              <p className="text-xl font-normal whitespace-nowrap">Upload a file</p>
             </div>
               
             <input
@@ -163,12 +163,28 @@ export default function Home() {
 
         {/* `Recent History` section */}
         <p className="text-xl font-normal leading-9 pt-[24px] pb-[12px]">Recent History</p>
-        <div className="flex justify-center w-full space-x-4 pb-10">
+        <div className="flex justify-center w-full space-x-4 ">
+            <PatentCard 
+              title="Microfluidic device for deformable beads enrichment and self-regulated ordering and encapsulation in droplets"
+              tags={['Biomed', 'Physical Device']}
+              status="Pending"
+              patentId="US20210331174A1"
+            />
 
-          {data.map((patent) => renderPatentCard(patent))}
-          
-        </div>
+            <PatentCard 
+              title="Method and Apparatus for Image-Based Navigation"
+              tags={['Biomed']}
+              status="Pending"
+              patentId="US20240024042A1"
+            />
 
+            <PatentCard 
+              title="Single sided light-actuated microfluidic device with integrated mesh ground"
+              tags={['Biomed']}
+              status="Active"
+              patentId="US9815056B2"
+            />
+          </div>
       </main>
       
       {isModalVisible && (
